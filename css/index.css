@@ -2,6 +2,7 @@
 @import './cover.css';
 @import './header.css';
 @import './lights.css';
+@import './stats.css';
 
 :root {
     --white: #fffffe;
@@ -25,4 +26,5 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
