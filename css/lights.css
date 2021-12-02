@@ -9,7 +9,7 @@
 .light.is-big {
     inline-size: 2rem;
     block-size: 2rem;
-    border: 0.25rem solid var(--white);
+    border: 0.125rem solid var(--white);
     box-sizing: border-box;
 }
 .light.is-sky {
