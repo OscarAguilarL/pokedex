@@ -1,6 +1,6 @@
 .screen-border {
     padding: 1.5rem;
-    padding-block-end: 1.75rem;
+    padding-block-end: 1.25rem;
     border-radius: 0.5rem;
     background-color: var(--white);
     clip-path: polygon(
