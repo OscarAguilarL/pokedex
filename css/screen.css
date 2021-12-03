@@ -1,9 +1,6 @@
-.screen {
-}
-
 .screen-border {
     padding: 1.5rem;
-    padding-block-end: 2.75rem;
+    padding-block-end: 1.75rem;
     border-radius: 0.5rem;
     background-color: var(--white);
     clip-path: polygon(
@@ -25,4 +22,25 @@
     block-size: 10rem;
     box-sizing: border-box;
     background-size: cover;
+}
+
+.screen-borderBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block-start: 1.25rem;
+}
+
+.screen-borderBottom .center {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.button-circle {
+    border: 1px solid red;
+    inline-size: 1rem;
+    block-size: 1rem;
+    border-radius: 50%;
+    background-color: var(--primary);
 }
