@@ -3,6 +3,7 @@ import { getPokemon, getPokemonSpecies } from './api.js';
 const $image = document.querySelector('#image');
 const $description = document.querySelector('#description');
 const $screen = document.querySelector('#screen');
+const $light = document.querySelector('#animatedLight');
 
 export const setImage = (img) => {
     $image.src = img;
@@ -15,6 +16,17 @@ const setDesc = (text) => {
 const loader = (isLoading = false) => {
     const img = isLoading ? 'url(./images/loading.gif)' : '';
     $screen.style.backgroundImage = img;
+};
+
+export const speech = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'es';
+    speechSynthesis.speak(utterance);
+    $light.classList.add('is-animated');
+
+    utterance.addEventListener('end', () =>
+        $light.classList.remove('is-animated')
+    );
 };
 
 export const findPokemon = async (id) => {
@@ -41,6 +53,7 @@ export const findPokemon = async (id) => {
         id: pokemonData.id,
         sprites,
         description: flavor_text,
+        name: pokemonData.name,
     };
 };
 
@@ -51,6 +64,7 @@ export const setPokemon = async (id) => {
 
     setImage(pokemon.sprites[0]);
     setDesc(pokemon.description);
+    speech(`${pokemon.name}, ${pokemon.description}`);
 
     return pokemon;
 };
