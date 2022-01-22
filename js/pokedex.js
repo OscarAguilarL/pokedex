@@ -26,6 +26,7 @@ export const findPokemon = async (id) => {
     );
 
     return {
+        id: pokemonData.id,
         sprites: pokemonData.sprites.front_default,
         description: flavor_text,
     };
@@ -33,9 +34,11 @@ export const findPokemon = async (id) => {
 
 export const setPokemon = async (id) => {
     loader(true); // loader
-    const { sprites, description } = await findPokemon(id);
+    const pokemon = await findPokemon(id);
     loader(false); // quitar loader
 
-    setImage(sprites);
-    setDesc(description);
+    setImage(pokemon.sprites);
+    setDesc(pokemon.description);
+
+    return pokemon
 };
