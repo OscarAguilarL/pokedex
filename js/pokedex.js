@@ -4,7 +4,7 @@ const $image = document.querySelector('#image');
 const $description = document.querySelector('#description');
 const $screen = document.querySelector('#screen');
 
-const setImage = (img) => {
+export const setImage = (img) => {
     $image.src = img;
 };
 
@@ -32,8 +32,6 @@ export const findPokemon = async (id) => {
             sprites.push(pokemonData.sprites[item]);
         }
     }
-
-    console.log(sprites);
 
     const { flavor_text } = speciesData.flavor_text_entries.find(
         (flavor) => flavor.language.name === 'es'
