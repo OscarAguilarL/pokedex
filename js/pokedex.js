@@ -20,6 +20,20 @@ const loader = (isLoading = false) => {
 export const findPokemon = async (id) => {
     const { data: pokemonData } = await getPokemon(id);
     const { data: speciesData } = await getPokemonSpecies(id);
+    const sprites = [pokemonData.sprites.front_default];
+
+    for (let item in pokemonData.sprites) {
+        if (
+            item !== 'front_default' &&
+            item !== 'other' &&
+            item !== 'versions' &&
+            pokemonData.sprites[item] !== null
+        ) {
+            sprites.push(pokemonData.sprites[item]);
+        }
+    }
+
+    console.log(sprites);
 
     const { flavor_text } = speciesData.flavor_text_entries.find(
         (flavor) => flavor.language.name === 'es'
@@ -27,7 +41,7 @@ export const findPokemon = async (id) => {
 
     return {
         id: pokemonData.id,
-        sprites: pokemonData.sprites.front_default,
+        sprites,
         description: flavor_text,
     };
 };
@@ -37,8 +51,8 @@ export const setPokemon = async (id) => {
     const pokemon = await findPokemon(id);
     loader(false); // quitar loader
 
-    setImage(pokemon.sprites);
+    setImage(pokemon.sprites[0]);
     setDesc(pokemon.description);
 
-    return pokemon
+    return pokemon;
 };
