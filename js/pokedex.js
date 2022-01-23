@@ -1,4 +1,5 @@
 import { getPokemon, getPokemonSpecies } from './api.js';
+import { createChart } from './charts.js';
 
 const $image = document.querySelector('#image');
 const $description = document.querySelector('#description');
@@ -34,6 +35,8 @@ export const findPokemon = async (id) => {
     const { data: speciesData } = await getPokemonSpecies(id);
     const sprites = [pokemonData.sprites.front_default];
 
+    const stats = pokemonData.stats.map((item) => item.base_stat);
+
     for (let item in pokemonData.sprites) {
         if (
             item !== 'front_default' &&
@@ -54,9 +57,11 @@ export const findPokemon = async (id) => {
         sprites,
         description: flavor_text,
         name: pokemonData.name,
+        stats,
     };
 };
 
+let activeChart = null;
 export const setPokemon = async (id) => {
     loader(true); // loader
     const pokemon = await findPokemon(id);
@@ -65,6 +70,11 @@ export const setPokemon = async (id) => {
     setImage(pokemon.sprites[0]);
     setDesc(pokemon.description);
     speech(`${pokemon.name}, ${pokemon.description}`);
+
+    if (activeChart instanceof Chart) {
+        activeChart.destroy();
+    }
+    activeChart = createChart(pokemon.stats, pokemon.statsName);
 
     return pokemon;
 };
